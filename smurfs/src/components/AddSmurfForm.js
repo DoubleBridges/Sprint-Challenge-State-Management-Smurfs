@@ -10,7 +10,6 @@ const AddSmurfForm = () => {
   const [smurfs, setSmurfs] = useContext(SmurfContext)
 
   const submitHandler = () => {
-    console.log(`submitHandler`, values)
   
     axios.post(`http://localhost:3333/smurfs`, values)
       .then(res => setSmurfs(res.data))

@@ -1,16 +1,10 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
-import { useForm } from '../../hooks/useForm'
-
 const SearchBox = props => {
 
-  const [values, handleChanges, resetForm] = useForm({ name: '' })
-
   const submitHandler = () => {
-    props.submitSmurfForEdit(values.name)
-    console.log(`SearchBox: submitHandler:`, values.name)
-    resetForm()
+    props.submitSmurfForEdit(props.values.name)
   }
 
   return (
@@ -19,9 +13,9 @@ const SearchBox = props => {
           fluid
           name='name'
           label="Enter Name"
-          value={values.name}
+          value={props.values.name}
           placeholder='Enter Name'
-          onChange={handleChanges}
+          onChange={props.handleChanges}
         />
         <Form.Button>Search Name</Form.Button>
     </Form>

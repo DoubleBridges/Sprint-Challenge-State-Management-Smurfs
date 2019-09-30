@@ -8,7 +8,6 @@ const Smurf = props => {
   const [smurfs, setSmurfs] = useContext(SmurfContext)
 
   const deleteSmurf = () => {
-    console.log(props)
     axios.delete(`http://localhost:3333/smurfs/${props.id}`)
       .then(res => setSmurfs(res.data))
       .catch(err => console.log(`axios.delete`, err))

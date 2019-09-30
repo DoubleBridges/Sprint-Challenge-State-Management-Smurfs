@@ -14,5 +14,5 @@ export const useForm = (initialValue) => {
         height: ''
     })
   }
-  return [values, handleChanges, resetForm]
+  return [values, handleChanges, resetForm, setValues]
 }

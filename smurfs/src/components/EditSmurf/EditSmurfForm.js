@@ -1,19 +1,19 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Divider, Segment, Grid } from 'semantic-ui-react'
-import axios from 'axios'
 
 import SearchBox from './SearchBox';
 import EditBox from './EditBox';
 import { SmurfContext } from '../../contexts/index';
+import { useForm } from '../../hooks/useForm';
 
 const EditSmurfForm = () => {
 
   const [smurfs] = useContext(SmurfContext)
 
-  const [smurf, setSmurf] = useState({});
+  const [values, handleChanges, resetForm, setValues] = useForm({})
 
   const submitSmurfForEdit = smurfForEdit => {
-    setSmurf(smurfs.filter(smurf => smurf.name === smurfForEdit)[0])
+    setValues(smurfs.filter(smurf => smurf.name === smurfForEdit)[0])
   }
 
   return (
@@ -25,11 +25,15 @@ const EditSmurfForm = () => {
           <Grid.Column>
             <SearchBox
               submitSmurfForEdit={submitSmurfForEdit}
+              handleChanges={handleChanges}
+              values={values}
             />
           </Grid.Column>
           <Grid.Column>
             <EditBox
-              smurf={smurf}
+              smurf={values}
+              handleChanges={handleChanges}
+              resetForm={resetForm}
             />
           </Grid.Column>
         </Grid.Row>

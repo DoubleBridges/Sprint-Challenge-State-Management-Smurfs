@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Form, Label } from 'semantic-ui-react'
 import axios from 'axios'
 
-import { useForm } from '../../hooks/useForm';
 import { SmurfContext } from '../../contexts/index';
 
 const EditBox = props => {
@@ -10,38 +9,33 @@ const EditBox = props => {
   const [smurfs, setSmurfs] = useContext(SmurfContext)
 
   const submitHandler = () => {
-    console.log(`EditBox: submitHandler`, values)
   
-    axios.put(`http://localhost:3333/smurfs/${values.id}`, values)
+    axios.put(`http://localhost:3333/smurfs/${props.smurf.id}`, props.smurf)
       .then(res => setSmurfs(res.data))
       .catch(err => console.log(err))
-    resetForm()
+    props.resetForm()
   }
-
-  const [values, handleChanges, resetForm] = useForm(props.smurf)
-
-  console.log(`EditBox: props, props.smurf, and values:`, props, props.smurf, values)
 
   return (
     <Form onSubmit={submitHandler}>
       <Label
-        content={values.name || "Name"}
+        content={props.smurf.name || "Name"}
       />
       <Form.Input
         fluid
         name='age'
         label='Age'
-        value={values.age}
+        value={props.smurf.age || ''}
         placeholder='Age'
-        onChange={handleChanges}
+        onChange={props.handleChanges}
       />
       <Form.Input
         fluid
         name='height'
         label='Height'
-        value={values.height}
+        value={props.smurf.height || ''}
         placeholder='Height in cm'
-        onChange={handleChanges}
+        onChange={props.handleChanges}
       />
       <Form.Button>Submit Changes</Form.Button>
     </Form>
